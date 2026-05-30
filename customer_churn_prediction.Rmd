@@ -6,25 +6,120 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown
+# Abstract
+Provide a concise summary of the study including purpose, methods, results, and conclusions (150–250 words).
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Chapter 1: Introduction
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Background of the Study
+Discuss the context and importance of the research problem.
 
-```{r cars}
-summary(cars)
+## Statement of the Problem
+Clearly state the research questions.
+
+1. What is ...?
+2. How does ...?
+
+## Objectives of the Study
+### General Objective
+- To investigate ...
+
+### Specific Objectives
+- To determine ...
+- To analyze ...
+
+## Hypotheses (if applicable)
+- **H0**: There is no significant relationship between ...
+- **H1**: There is a significant relationship between ...
+
+## Significance of the Study
+Explain who benefits and how.
+
+## Scope and Limitations
+Define the boundaries of the study.
+
+
+# Chapter 2: Review of Related Literature
+
+## Related Studies
+Summarize previous research.
+
+## Related Literature
+Discuss theories and concepts.
+
+## Conceptual Framework
+(Insert diagram if needed)
+
+```{r conceptual-framework, echo=FALSE}
+# Example placeholder
+# plot(1:10, 1:10, main="Conceptual Framework (Replace)")
 ```
 
-## Including Plots
+## Chapter 3: Methodology
+Research Design
 
-You can also embed plots, for example:
+Describe the design (e.g., descriptive, experimental).
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+Data Collection
+
+Get a data set from www.kaggle.com
+
+```{r}
+# Load dataset
+# data <- read.csv("your_data.csv")
+# head(data)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Variables Description
+
+Explain dependent and independent variables.
+
+Data Analysis Techniques
+
+- Descriptive Statistics
+- Inferential Statistics
+- Machine Learning Models (if applicable)
+
+## Chapter 4: Results and Discussion
+Descriptive Statistics
+
+```{r}
+#summary(data)
+```
+
+Visualization
+```{r}
+library(ggplot2)
+#ggplot(data, aes(x=Variable1, y=Variable2)) +
+#  geom_point() +
+#  theme_minimal()
+```
+
+Model (Example: Linear Regression)
+```{r}
+#model <- lm(Y ~ X1 + X2, data=data)
+#summary(model)
+```
+
+Interpretation
+
+Discuss findings in paragraph form.
+
+## Chapter 5: Conclusion and Recommendations
+Conclusion
+
+Summarize key findings.
+
+**Recommendations**
+
+Provide practical suggestions
+
+## References
+
+Use APAformat.
+
+## Appendices
+Appendix A: Code
