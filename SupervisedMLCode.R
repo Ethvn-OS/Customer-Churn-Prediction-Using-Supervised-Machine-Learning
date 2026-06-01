@@ -1,6 +1,7 @@
 library(knitr)
 library(tidyr)
 library(dplyr)
+library(ggplot2)
 
 # Importing dataset
 init_data <- read.csv('C:/Data Analysis/datasets/customer_churn.csv')
@@ -28,3 +29,44 @@ filter(init_data, is.na(TotalCharges))
 # Therefore, these records were removed from the analysis
 
 init_data <- filter(init_data, !is.na(TotalCharges))
+
+# Checking class imbalance
+table(init_data$Churn)
+prop.table(table(init_data$Churn))
+
+ggplot(init_data, aes(x = Churn, fill = Churn)) +
+  geom_bar() +
+  scale_fill_manual(values = c("red", "green"))
+  labs(
+    title = "Distribution of Customer Churn",
+    x = "Churn",
+    y = "Count"
+  )
+
+# Detecting outliers  (tenure = no outliers)
+boxplot(init_data$tenure,
+        horizontal = TRUE)$out
+
+# MonthlyCharges (no outliers)
+boxplot(init_data$MonthlyCharges,
+        horizontal = TRUE)$out
+
+# TotalCharges (no outliers)
+boxplot(init_data$TotalCharges,
+        horizontal = TRUE)$out
+
+# The numerical variables don't have any outliers, which is good
+
+# Checking payment method
+unique(init_data$PaymentMethod)
+table(init_data$PaymentMethod)
+
+ggplot(init_data, aes(x = PaymentMethod, fill = PaymentMethod)) +
+  geom_bar() +
+  scale_fill_manual(values = c("blue", "green", "pink", "violet"))
+  labs(
+    title = "Distribution of Customer Churn",
+    x = "Churn",
+    y = "Count"
+  )
+  
