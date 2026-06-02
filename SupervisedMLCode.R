@@ -3,6 +3,7 @@ library(tidyr)
 library(dplyr)
 library(ggplot2)
 library(psych)
+library(rcompanion)
 
 # Importing dataset
 init_data <- read.csv('C:/Data Analysis/datasets/customer_churn.csv')
@@ -24,11 +25,12 @@ filter(init_data, is.na(TotalCharges))
 # and that they were new subscribers who had not yet accumulated charges. Note that these are 11
 # customers
 
+# Code for changing the NA values to 0
 # init_data$TotalCharges[is.na(init_data$TotalCharges)] <- 0
 # filter(init_data, TotalCharges == 0)
 
-# Another option would be to delete the rows entirely... so unsa man... HAHAHAHHAHA
-# In the end, kay i'll remove nalang because only a small number of observations were affected
+# Another option would be to delete the rows entirely...
+# In the end, I removed the rows because only a small number of observations were affected
 # Therefore, these records were removed from the analysis
 
 init_data <- filter(init_data, !is.na(TotalCharges))
@@ -118,3 +120,76 @@ prop.table(
   table(init_data$PaymentMethod, init_data$Churn),
   margin = 1
 )
+
+# using histograms for EDA
+ggplot(init_data, aes(x = tenure)) +
+  geom_histogram(bins = 30)
+
+ggplot(init_data, aes(x = MonthlyCharges)) +
+  geom_histogram(bins = 30)
+
+ggplot(init_data, aes(x = TotalCharges)) +
+  geom_histogram(bins = 30)
+
+ggplot(init_data,
+       aes(x = Churn,
+           y = tenure,
+           fill = Churn)) +
+  geom_boxplot()
+
+ggplot(init_data,
+       aes(x = Churn,
+           y = MonthlyCharges,
+           fill = Churn)) +
+  geom_boxplot()
+
+ggplot(init_data,
+       aes(x = Churn,
+           y = TotalCharges,
+           fill = Churn)) +
+  geom_boxplot()
+
+# Doing chi-square test to test associativity between categorical predictors and the target variable
+# Also, maybe we'll use Cramer's V to see how strong their relationship is, if there is any.
+
+contract_churn <- table(
+  init_data$Contract,
+  init_data$Churn
+)
+chisq.test(contract_churn)
+cramerV(contract_churn)
+
+partner_churn <- table(
+  init_data$Partner,
+  init_data$Churn
+)
+chisq.test(partner_churn)
+cramerV(partner_churn)
+
+internetservice_churn <- table(
+  init_data$InternetService,
+  init_data$Churn
+)
+chisq.test(internetservice_churn)
+cramerV(internetservice_churn)
+
+techsupport_churn <- table(
+  init_data$TechSupport,
+  init_data$Churn
+)
+chisq.test(techsupport_churn)
+cramerV(techsupport_churn)
+
+paperless_churn <- table(
+  init_data$PaperlessBilling,
+  init_data$Churn
+)
+chisq.test(paperless_churn)
+cramerV(paperless_churn)
+
+paymethod_churn <- table(
+  init_data$PaymentMethod,
+  init_data$Churn
+)
+chisq.test(paymethod_churn)
+cramerV(paymethod_churn)
